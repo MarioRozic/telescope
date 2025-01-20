@@ -9,5 +9,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       'msw/node': 'msw/lib/esm/node/index.js', // Adjust the path based on the actual structure
     },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 })
