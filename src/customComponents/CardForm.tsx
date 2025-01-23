@@ -1,31 +1,28 @@
-import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 
-export default function CardForm() {
-  const [formData, setFormData] = useState({
-    propertyName: "",
-    address: "",
-    zipCode: "",
-    city: "",
-    coordinates: "",
-    estimatedValue: "",
-    totalRisk: "",
-    handledRisks: "",
-    relevantRisks: "",
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+type CardFormType = {
+  formData: {
+    propertyName: string;
+    address: string;
+    zipCode: string;
+    city: string;
+    coordinates: string;
+    estimatedValue: number;
+    totalRisk: number;
+    handledRisks: number;
+    relevantRisks: number;
   };
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+};
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-
+export default function CardForm({
+  formData,
+  handleChange,
+  handleSubmit,
+}: CardFormType) {
   return (
     <form
       onSubmit={handleSubmit}

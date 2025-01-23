@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./routes/Home";
 import Details from "./routes/Details";
+import Form from "./routes/Form";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
               <a href="/" className="hover:text-blue-300">
                 Home
               </a>
+              <a href="/add" className="hover:text-blue-300">
+                Add
+              </a>
             </div>
           </div>
         </nav>
@@ -21,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:id" element={<Details />} />
+            <Route path="/add" element={<Form />} />
           </Routes>
         </div>
       </Router>

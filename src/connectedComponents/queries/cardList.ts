@@ -12,6 +12,6 @@ export function useCardList() {
         queryKey: [
             'CardList'
         ],
-        queryFn: async () => fetchData()
+        queryFn: async () => fetchData(),
     })
 }

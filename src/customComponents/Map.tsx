@@ -3,6 +3,7 @@ import {
   TileLayer,
   Marker,
   Popup,
+  useMapEvents,
   //   useMapEvents,
 } from "react-leaflet";
 import {
@@ -13,28 +14,6 @@ import "leaflet/dist/leaflet.css";
 import { Skeleton } from "../components/ui/skeleton";
 import { useEffect, useRef } from "react";
 
-// function ClickableMap() {
-//   const [latLng, setLatLng] = useState<LatLngExpression | null>(null);
-
-//   useMapEvents({
-//     click(e) {
-//       setLatLng(e.latlng);
-//       console.log("Clicked Location:", e.latlng);
-//     },
-//   });
-
-//   return (
-//     <>
-//       {latLng && (
-//         <div>
-//           <h3>Latitude: {latLng.lat}</h3>
-//           <h3>Longitude: {latLng.lng}</h3>
-//         </div>
-//       )}
-//     </>
-//   );
-// }
-
 type MapType = {
   pins: {
     lat: number;
@@ -44,6 +23,7 @@ type MapType = {
   isLoading?: boolean;
   isError?: boolean;
   selectedIndex?: number | null;
+  setCoordinates?: (coords: { lat: number; lng: number }) => void; // Parent function to update clicked coordinates
 };
 
 export default function Map({
@@ -51,9 +31,9 @@ export default function Map({
   isLoading = false,
   isError = false,
   selectedIndex = null,
+  setCoordinates,
 }: MapType) {
   const markersRef = useRef<(LeafletMarker | null)[]>([]);
-  console.log(selectedIndex);
 
   // Function to manually open the popup
   const openPopup = (index: number) => {
@@ -61,6 +41,17 @@ export default function Map({
     if (marker) {
       marker.openPopup(); // Manually open the popup for the selected marker
     }
+  };
+
+  // Custom component to handle map clicks
+  const ClickableMap = () => {
+    useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng;
+        if (setCoordinates) setCoordinates({ lat, lng }); // Pass the clicked coordinates to the parent component
+      },
+    });
+    return null; // This component doesn't render anything on the map
   };
 
   useEffect(() => {
@@ -92,7 +83,6 @@ export default function Map({
         {/* Tile layer from OpenStreetMap */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
-        {/* Display initial pins */}
         {pins &&
           pins.map((location, index) => (
             <Marker
@@ -104,8 +94,7 @@ export default function Map({
             </Marker>
           ))}
 
-        {/* Handle map clicks
-      <ClickableMap /> */}
+        <ClickableMap />
       </MapContainer>
     </>
   );
