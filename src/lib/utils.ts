@@ -26,7 +26,6 @@ export function splitCoordinates(coordinates: string) {
 export function populateLocalStorageWithCards() {
   const storedCards = localStorage.getItem("cards");
 
-  // Only populate if no cards are already stored in localStorage
   if (!storedCards) {
     localStorage.setItem("cards", JSON.stringify(CARDS));
   }

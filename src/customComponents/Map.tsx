@@ -4,12 +4,8 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  //   useMapEvents,
 } from "react-leaflet";
-import {
-  //  LatLngExpression,
-  Marker as LeafletMarker,
-} from "leaflet";
+import { Marker as LeafletMarker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Skeleton } from "../components/ui/skeleton";
 import { useEffect, useRef } from "react";
@@ -23,7 +19,7 @@ type MapType = {
   isLoading?: boolean;
   isError?: boolean;
   selectedIndex?: number | null;
-  setCoordinates?: (coords: { lat: number; lng: number }) => void; // Parent function to update clicked coordinates
+  setCoordinates?: (coords: { lat: number; lng: number }) => void;
 };
 
 export default function Map({
@@ -35,23 +31,21 @@ export default function Map({
 }: MapType) {
   const markersRef = useRef<(LeafletMarker | null)[]>([]);
 
-  // Function to manually open the popup
   const openPopup = (index: number) => {
     const marker = markersRef.current[index];
     if (marker) {
-      marker.openPopup(); // Manually open the popup for the selected marker
+      marker.openPopup();
     }
   };
 
-  // Custom component to handle map clicks
   const ClickableMap = () => {
     useMapEvents({
       click: (e) => {
         const { lat, lng } = e.latlng;
-        if (setCoordinates) setCoordinates({ lat, lng }); // Pass the clicked coordinates to the parent component
+        if (setCoordinates) setCoordinates({ lat, lng });
       },
     });
-    return null; // This component doesn't render anything on the map
+    return null;
   };
 
   useEffect(() => {
@@ -80,7 +74,6 @@ export default function Map({
         zoom={12}
         style={{ width: "100%", height: "100vh" }}
       >
-        {/* Tile layer from OpenStreetMap */}
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
         {pins &&
