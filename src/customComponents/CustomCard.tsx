@@ -8,7 +8,8 @@ import {
 import { Skeleton } from "../components/ui/skeleton";
 import { formatCurrency } from "../lib/utils";
 
-type CustomCard = {
+type CustomCardType = {
+  id: number;
   propertyName: string;
   totalRisk: number;
   handledRisks: number;
@@ -16,9 +17,13 @@ type CustomCard = {
   currency?: string;
   isLoading?: boolean;
   isError?: boolean;
+  onCardClick?: (id: number) => void;
+  onMouseEnter?: (index: number) => void;
+  onMouseLeave?: () => void;
 };
 
 export default function CustomCard({
+  id,
   propertyName,
   totalRisk,
   handledRisks,
@@ -26,9 +31,17 @@ export default function CustomCard({
   currency = "NOK",
   isLoading = false,
   isError = false,
-}: CustomCard) {
+  onCardClick = () => {},
+  onMouseEnter = () => {},
+  onMouseLeave = () => {},
+}: CustomCardType) {
   return (
-    <Card className="w-80 shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105">
+    <Card
+      className="w-80 shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+      onClick={() => onCardClick(id)}
+      onMouseEnter={() => onMouseEnter(id)}
+      onMouseLeave={() => onMouseLeave()}
+    >
       <CardHeader className="p-0">
         {isLoading ? (
           <Skeleton className="w-full h-48" />

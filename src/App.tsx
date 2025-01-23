@@ -1,34 +1,30 @@
-import { useEffect } from "react";
-import "./App.css";
-import { Button } from "./components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "./components/ui/card";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from "./routes/Home";
+import Details from "./routes/Details";
 
 function App() {
-  useEffect(() => {
-    fetch("/user")
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, []);
-
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-      <h1>Hello world!</h1>
-      <Button>Click me</Button>
-      <Card className="w-96">
-        <CardHeader>
-          <CardTitle>Title</CardTitle>
-          <CardDescription>Description</CardDescription>
-        </CardHeader>
-        <CardContent>Card content goes here.</CardContent>
-      </Card>
-    </>
+    <div className="min-h-screen bg-gray-50">
+      <Router>
+        {/* Navbar */}
+        <nav className="bg-blue-600 text-white p-4 shadow-md">
+          <div className="container mx-auto flex justify-between items-center">
+            <div className="text-lg font-semibold">My Website</div>
+            <div className="space-x-6">
+              <a href="/" className="hover:text-blue-300">
+                Home
+              </a>
+            </div>
+          </div>
+        </nav>
+        <div className="container mx-auto p-6">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/:id" element={<Details />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
   );
 }
 

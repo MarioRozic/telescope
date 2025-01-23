@@ -16,3 +16,8 @@ export function formatCurrency(
     currencyDisplay,
   }).format(num);
 }
+
+export function splitCoordinates(coordinates: string) {
+  const [lat, lng] = coordinates.split(",").map(Number);
+  return { lat, lng };
+};
