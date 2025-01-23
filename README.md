@@ -37,7 +37,7 @@ npm run dev
 
 ### Start Storybook
 
-Launches Storybook for component development and testing on http://localhost:6006:
+Launches Storybook for component development and testing on `http://localhost:6006`:
 
 ```bash
 npm run storybook
