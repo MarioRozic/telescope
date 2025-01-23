@@ -10,7 +10,7 @@ function App() {
         {/* Navbar */}
         <nav className="bg-blue-600 text-white p-4 shadow-md">
           <div className="container mx-auto flex justify-between items-center">
-            <div className="text-lg font-semibold">My Website</div>
+            <div className="text-lg font-semibold">Telescope</div>
             <div className="space-x-6">
               <a href="/" className="hover:text-blue-300">
                 Home
