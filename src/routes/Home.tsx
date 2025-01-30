@@ -4,12 +4,12 @@ import ConnectedMap from "../connectedComponents/ConnectedMap";
 export default function Home() {
   return (
     <>
-      <div className="grid grid-cols-3 gap-6 h-screen">
-        <div className="col-span-2 overflow-auto">
-          <ConnectedCardList />
-        </div>
-        <div className="col-span-1">
+      <div className="grid grid-row-2 gap-5">
+        <div className="row-span-1 h-40">
           <ConnectedMap />
+        </div>
+        <div className="row-span-1">
+          <ConnectedCardList />
         </div>
       </div>
     </>

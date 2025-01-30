@@ -37,7 +37,7 @@ export default function CustomCard({
 }: CustomCardType) {
   return (
     <Card
-      className="w-80 shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
+      className="w-100 shadow-lg rounded-lg overflow-hidden transition-transform transform hover:scale-105"
       onClick={() => onCardClick(id)}
       onMouseEnter={() => onMouseEnter(id)}
       onMouseLeave={() => onMouseLeave()}

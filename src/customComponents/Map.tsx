@@ -5,7 +5,7 @@ import {
   Popup,
   useMapEvents,
 } from "react-leaflet";
-import { Marker as LeafletMarker } from "leaflet";
+import { LatLngExpression, Marker as LeafletMarker } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Skeleton } from "../components/ui/skeleton";
 import { useEffect, useRef } from "react";
@@ -14,16 +14,21 @@ type MapType = {
   pins: {
     lat: number;
     lng: number;
-    title: string;
+    title?: string;
   }[];
+  defaultCoords?: LatLngExpression;
   isLoading?: boolean;
   isError?: boolean;
   selectedIndex?: number | null;
   setCoordinates?: (coords: { lat: number; lng: number }) => void;
 };
 
+// lat: 51.5074,
+// lng: -0.1278,
+
 export default function Map({
   pins,
+  defaultCoords = { lat: 51.5074, lng: -0.1278 },
   isLoading = false,
   isError = false,
   selectedIndex = null,
@@ -70,9 +75,9 @@ export default function Map({
   return (
     <>
       <MapContainer
-        center={[51.5074, -0.1278]} // Set the map center to London
+        center={defaultCoords} // Set the map center to London
         zoom={12}
-        style={{ width: "100%", height: "100vh" }}
+        style={{ width: "100%", height: "100%" }}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 

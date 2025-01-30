@@ -78,7 +78,12 @@ export default function ConnectedFormMap() {
         />
       </div>
       <div className="col-span-2">
-        <Map pins={[]} setCoordinates={handleSetCoordinates} />
+        <Map
+          pins={[
+            { lat: clickedCoords?.lat ?? 0, lng: clickedCoords?.lng ?? 0 },
+          ]}
+          setCoordinates={handleSetCoordinates}
+        />
       </div>
     </div>
   );

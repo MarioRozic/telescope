@@ -15,6 +15,10 @@ export default function ConnectedMapDetails() {
       ]}
       isLoading={isLoading}
       isError={isError}
+      defaultCoords={{
+        lat: splitCoordinates(data?.coordinates ?? "").lat,
+        lng: splitCoordinates(data?.coordinates ?? "").lng,
+      }}
     />
   );
 }
